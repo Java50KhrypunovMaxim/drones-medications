@@ -11,6 +11,6 @@ import lombok.*;
 public class DroneModel {
 	@Id
 	@Enumerated(EnumType.STRING)
-ModelType modelName;
+	ModelType modelName;
 	int weight;
 }
