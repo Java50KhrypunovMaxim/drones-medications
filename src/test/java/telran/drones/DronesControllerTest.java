@@ -1,4 +1,4 @@
-package dronesmedications;
+package telran.drones;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.http.MediaType;
@@ -45,7 +45,7 @@ class DronesControllerTest {
 	void testRegisterDrone() throws Exception {
 		when(dronesService.registerDrone(droneDto)).thenReturn(droneDto);
 		String jsonDroneDto = mapper.writeValueAsString(droneDto); 
-		String actualJSON = mockMvc.perform(post("/drones").contentType(MediaType.APPLICATION_JSON)
+		String actualJSON = mockMvc.perform(post("http://localhost:8080/drones").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonDroneDto)).andExpect(status().isOk()).andReturn().getResponse()
 		.getContentAsString();
 		assertEquals(jsonDroneDto, actualJSON );	
@@ -55,7 +55,7 @@ class DronesControllerTest {
 	void testLoanDrone() throws Exception {
 		when(dronesService.loanDrone(droneMedication)).thenReturn(droneMedication);
 		String jsonDroneMedication = mapper.writeValueAsString(droneMedication); 
-		String actualJSON = mockMvc.perform(post("/drones/load").contentType(MediaType.APPLICATION_JSON)
+		String actualJSON = mockMvc.perform(post("http://localhost:8080/drones/load").contentType(MediaType.APPLICATION_JSON)
 				.content(jsonDroneMedication)).andExpect(status().isOk()).andReturn().getResponse()
 		.getContentAsString();
 		assertEquals(jsonDroneMedication, actualJSON );	
