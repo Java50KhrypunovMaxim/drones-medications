@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import telran.drones.dto.DroneDto;
 import telran.drones.dto.State;
 @Entity
 @Table(name="event_logs")
@@ -25,5 +26,6 @@ public class EventLog {
 		this.state = state;
 		this.batteryCapacity = batteryCapacity;
 	}
+	 
 	
 }

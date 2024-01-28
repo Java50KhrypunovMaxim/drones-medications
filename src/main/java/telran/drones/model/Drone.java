@@ -4,6 +4,8 @@ import lombok.*;
 import telran.drones.dto.DroneDto;
 import telran.drones.dto.State;
 @Entity
+@Getter
+@Setter
 @Table(name="drones")
 @NoArgsConstructor
 @AllArgsConstructor(access=AccessLevel.PRIVATE)
