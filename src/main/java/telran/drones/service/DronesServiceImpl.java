@@ -47,26 +47,31 @@ public class DronesServiceImpl implements DronesService {
 	    Drone drone = droneRepo.findByNumber(droneMedication.droneNumber())
 	            .orElseThrow(DroneNotFoundException::new);
 
-	    checkDroneAvailability(drone);
-
 	    Medication medication = medicationRepo.findByCode(droneMedication.medicationCode())
 	            .orElseThrow(MedicationNotFoundException::new);
-
+	    
+	    checkDroneAvailability(drone, medication);
+	    
 	    createEventLog(drone, State.LOADING, drone.getBatteryCapacity());
 
 	    log.debug("DroneMedication {} has been loaded", droneMedication);
 	    return droneMedication;
 	}
 
-	private void checkDroneAvailability(Drone drone) {
-	    if (drone.getState() != State.IDLE) {
-	        throw new IllegalDroneStateException();
-	    }
+	private void checkDroneAvailability(Drone drone, Medication medication) {
 
-	    if (drone.getBatteryCapacity() < 25) {
-	        throw new InsufficientBatteryCapacityException();
-	    }
-	}
+			if (drone.getState() != State.IDLE) {
+		        throw new IllegalDroneStateException();
+		    }
+
+		    if (drone.getBatteryCapacity() < 25) {
+		        throw new InsufficientBatteryCapacityException();
+		    }
+		    if (drone.getModel().getWeight() < medication.getWeight()) {
+				throw new ExcessiveWeightException();
+			}
+		}
+	    
 
     private void createEventLog(Drone drone, State newState, int batteryCapacity) {
         EventLog eventLog = new EventLog(LocalDateTime.now(), drone.getNumber(), newState, batteryCapacity);

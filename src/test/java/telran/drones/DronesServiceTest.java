@@ -76,8 +76,8 @@ class DronesServiceTest {
         dronesRepo.save(Drone.of(droneDto1));
         dronesRepo.save(Drone.of(droneDto2));
 
-        Medication medication1 = new Medication(MEDICATION_CODE1);
-        Medication medication2 = new Medication(MEDICATION_CODE2);
+        Medication medication1 = new Medication(MEDICATION_CODE1, 2000);
+        Medication medication2 = new Medication(MEDICATION_CODE2, 1500);
 
         medicationRepo.save(medication1);
         medicationRepo.save(medication2);
