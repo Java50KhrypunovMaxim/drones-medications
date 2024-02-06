@@ -1,33 +1,10 @@
 package telran.drones.dto;
 
-import static telran.drones.api.ValidationConstants.*;
 
-import java.util.Objects;
+import jakarta.validation.constraints.*;
+import static telran.drones.api.DronesValidationErrorMessages.*;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-
-public record DroneDto(
-		@NotEmpty (message=MISSING_NUMBER_OF_DRON_MESSAGE)
-		@Pattern(regexp = DRONE_NUMBER_REGEXP, message = WRONG_DRONE_NUMBER_MESSAGE) String number,
-		@NotNull (message=MISSING_ModelType_OF_DRON_MESSAGE)ModelType modelType) 
-{
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(number);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DroneDto other = (DroneDto) obj;
-		return Objects.equals(number, other.number);
-	}
+public record DroneDto(@Size(max=MAX_DRONE_NUMBER_LENGTH , message=DRONE_NUMBER_WRONG_LENGTH)
+@NotEmpty(message=MISSING_DRONE_NUMBER)String number, @NotNull(message=MISSING_MODEL) ModelType modelType) {
 
 }

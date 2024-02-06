@@ -1,10 +1,13 @@
 package telran.drones.repository;
 
+import java.util.Optional;
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import telran.drones.model.EventLog;
+import telran.drones.model.Medication;
 
-@Repository
-public interface EventLogRepository extends JpaRepository<EventLog, Long> {
+public interface MedicationRepo extends JpaRepository<Medication, String>{
+
 }

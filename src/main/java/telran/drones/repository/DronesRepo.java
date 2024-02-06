@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import telran.drones.dto.State;
 import telran.drones.model.Drone;
 import telran.drones.model.DroneModel;
+import telran.drones.projections.DroneNumber;
 
 @Repository
-public interface DroneRepository extends JpaRepository<Drone, String> {
+public interface DronesRepo extends JpaRepository<Drone, String>{
 
-	 Optional<Drone> findByNumber(String number);
-	 boolean existsByNumber(String number);
-	    
-	 Optional<Drone> findByModel(DroneModel model);
-	 boolean existsByModel(DroneModel model);
+	List<DroneNumber> findByStateAndBatteryCapacityGreaterThanEqual(State state, int capacityThreshold);
+@Query("select batteryCapacity from Drone where number=:droneNumber")
+	Integer findBatteryCapacity(String droneNumber);
+
 }

@@ -1,28 +1,17 @@
 package telran.drones.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 @Entity
+@Table(name="medications")
 @Getter
-@Table(name="medication")
-@NoArgsConstructor
+@ToString
 public class Medication {
-
-    @Id
-    @Column(name = "medication_code")
-    private String code;
-    
-    @Column(name = "weigth")
-    private int weight;
-
-
-    public Medication(String code, int weight ) {
-        this.code = code;
-        this.weight= weight;
-    }
+	@Id
+	String code;
+	@Column(nullable = false)
+	String name;
+	@Column(nullable = false)
+	int weight;
 }
